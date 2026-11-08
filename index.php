@@ -227,7 +227,7 @@ case 'report/preview':
 
 // ── Connecting accounts (admin or the client themself) ─────────
 case 'connect/meta':
-    require_login();
+    require_admin();   // you connect accounts for your clients
     $meta = meta_app();
     $back = static fn(int $c) => is_admin() ? 'clients/edit?id=' . $c : 'dashboard';
     if ($meta['app_id'] === '' || $meta['app_secret'] === '') {
@@ -283,7 +283,7 @@ case 'connect/meta':
     view('choose_page', ['pages' => $pages]);
 
 case 'connect/tiktok':
-    require_login();
+    require_admin();
     $app = tiktok_app();
     $back = static fn(int $c) => is_admin() ? 'clients/edit?id=' . $c : 'dashboard';
     if ($app['client_key'] === '') {

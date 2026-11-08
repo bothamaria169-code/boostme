@@ -14,10 +14,14 @@
   <?php foreach (['facebook' => 'meta', 'instagram' => 'meta', 'tiktok' => 'tiktok'] as $pl => $flow): $c = $conns[$pl] ?? null; ?>
     <div class="conn"><i class="fa-brands fa-<?= $pl ?>"></i><b><?= PLATFORMS[$pl] ?></b>
       <span class="muted"><?= $c ? e($c['account_name']) : 'Not connected' ?></span>
-      <a class="btn sm <?= $c ? 'ghost' : '' ?> right" href="<?= e(url('connect/' . $flow . '?client=' . $client['id'])) ?>"><?= $c ? 'Reconnect' : 'Connect' ?></a>
+      <?php if (is_admin()): ?>
+        <a class="btn sm <?= $c ? 'ghost' : '' ?> right" href="<?= e(url('connect/' . $flow . '?client=' . $client['id'])) ?>"><?= $c ? 'Reconnect' : 'Connect' ?></a>
+      <?php else: ?>
+        <span class="tag <?= $c ? 'posted' : 'pending' ?> right"><?= $c ? 'Connected' : 'Being set up' ?></span>
+      <?php endif; ?>
     </div>
   <?php endforeach; ?>
-  <p class="muted" style="font-size:13px">Facebook and Instagram connect together: log in with the Facebook account that manages your business Page; Instagram must be a Business/Creator account linked to that Page.</p>
+  <?php if (!is_admin()): ?><p class="muted" style="font-size:13px">Your BoostMe account manager connects and looks after these accounts for you.</p><?php endif; ?>
 </div>
 <?php endif; ?>
 

@@ -30,7 +30,7 @@
         <?php if ($c): ?><form method="post" style="display:inline"><?= csrf_field() ?><input type="hidden" name="do" value="disconnect"><input type="hidden" name="platform" value="<?= $pl ?>"><button class="btn sm ghost">Remove</button></form><?php endif; ?></span>
       </div>
     <?php endforeach; ?>
-    <p class="muted" style="font-size:13px">Easiest: give the client a login and let them press Connect on their own dashboard — they log in to their own Facebook/TikTok, you never need their passwords.</p>
+    <p class="muted" style="font-size:13px">Press Connect while logged in (in this browser) to the Facebook account that manages the client's Page — or to their TikTok account. Clients only see the status.</p>
   </div>
 
   <div class="card"><h2>Client logins</h2>
