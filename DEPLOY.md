@@ -59,8 +59,8 @@ Chrome profile or incognito) logged in to the **client's** Facebook (to connect 
 
 **In the client's window:**
 8. Check their Instagram is a **Business/Professional** account linked to their Facebook Page.
-9. developers.facebook.com → **Get started** (confirm email/phone) → `developers.facebook.com/requests`
-   → **Accept** the Tester invite.
+9. developers.facebook.com → **Get started** (confirm email/phone). Then on **facebook.com** → profile
+   picture → **Settings & privacy → Settings → Apps and websites → Requests** → **Accept** BoostMe.
 10. Log in to BoostMe as admin → **Clients → H&L Beauty Salon → Manage → Connect** (Facebook) →
     **Opt in to all** → Continue. Facebook and Instagram both show as connected.
 11. **New post** → H&L → a photo → tick Facebook + Instagram → save → **Post now**. Check it on their Page.

@@ -47,8 +47,8 @@ Until Meta approves the app (step 8), it only works for people who have a role o
   1. In **your** browser profile: App dashboard → **App roles → Roles → Add People → Tester** → the
      client's Facebook name or profile link.
   2. In a **second browser profile** (or incognito) logged in as the client: open developers.facebook.com
-     → **Get started** (registers them as a developer: confirm the email/phone) → then
-     `developers.facebook.com/requests` → **Accept**.
+     → **Get started** (registers them as a developer: confirm the email/phone) → then on facebook.com:
+     profile picture → **Settings & privacy → Settings → Apps and websites → Requests → Accept** BoostMe.
   3. In that same client window, log in to BoostMe as admin → H&L → **Connect**.
   Repeat for each new client.
 
