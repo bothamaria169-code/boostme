@@ -14,10 +14,12 @@ PHP extensions: `pdo_mysql`, `curl`, `gd`, `mbstring`.
 
 ## 2. Database
 phpMyAdmin → `swiftfusionco_boostme` → **Import** → `install.sql`. (Creates the tables and the
-H&L Beauty Salon client.) Make sure user `swiftfusionco_booster` has ALL PRIVILEGES on it.
+H&L Beauty Salon client.) Make sure user `swiftfusionco_boostme_admin` has ALL PRIVILEGES on it
+(cPanel → MySQL Databases → Add User To Database).
 
 ## 3. .env
-File Manager → copy `.env.example` to `.env` → fill in `DB_PASS`, and the mailbox
+File Manager → copy `.env.example` to `.env` (in `repositories/boostme`; tick *Show Hidden Files*
+in Settings to see it) → set `DB_USER=swiftfusionco_boostme_admin`, fill in `DB_PASS`, and the mailbox
 (`MAIL_USER`/`MAIL_PASS` — create `boostme@swiftfusion.co.za` in cPanel → Email Accounts).
 
 ## 4. First login
@@ -31,9 +33,41 @@ cPanel → **Cron Jobs** → every 5 minutes (`*/5 * * * *`):
 ```
 Check the PHP path: if cPanel shows a versioned one (e.g. `/usr/local/bin/ea-php82`), use that.
 
-## 6. Meta + TikTok apps
-Follow **SETUP-META-TIKTOK.md**: creating the apps, redirect URIs, Live mode, connecting H&L, and the
-Meta App Review / TikTok review steps. You connect each client's accounts yourself (admin only).
+## 6. Meta app (Facebook + Instagram)
+Use **two browser windows**: one logged in to **your** Facebook (to manage the app), one (a second
+Chrome profile or incognito) logged in to the **client's** Facebook (to connect their Page).
+
+**In your window:**
+1. developers.facebook.com → **My Apps** → open the existing **BoostMe** app (1040148602389540),
+   or **Create app** → **Other** → **Business** → name `BoostMe`.
+2. **Add product → Facebook Login for Business → Configurations → Create configuration**:
+   Login variation **General**, token **User access token**, assets **Pages + Instagram accounts**,
+   permissions `pages_show_list`, `pages_manage_posts`, `pages_read_engagement`, `instagram_basic`,
+   `instagram_content_publish`, `business_management` → Create → copy the **Configuration ID**.
+3. **Facebook Login for Business → Settings**: Client OAuth + Web OAuth + Enforce HTTPS **On**;
+   Valid OAuth Redirect URIs: `https://boostme.swiftfusion.co.za/connect/meta` → Save.
+4. **App settings → Basic**: App domain `boostme.swiftfusion.co.za`; Privacy Policy URL and Data
+   deletion instructions URL `https://boostme.swiftfusion.co.za/privacy`; Terms URL
+   `https://boostme.swiftfusion.co.za/terms`; Category Business; 1024×1024 icon → Save.
+   Copy the **App ID** and **App secret**.
+5. BoostMe → **Settings** → paste App ID, App secret, Configuration ID → Save.
+6. **App roles → Roles → Add People → Tester** → the client's Facebook name/profile link.
+7. Switch **App mode** to **Live** (top of the dashboard). In Development mode posts are only
+   visible to people with a role on the app.
+
+**In the client's window:**
+8. Check their Instagram is a **Business/Professional** account linked to their Facebook Page.
+9. developers.facebook.com → **Get started** (confirm email/phone) → `developers.facebook.com/requests`
+   → **Accept** the Tester invite.
+10. Log in to BoostMe as admin → **Clients → H&L Beauty Salon → Manage → Connect** (Facebook) →
+    **Opt in to all** → Continue. Facebook and Instagram both show as connected.
+11. **New post** → H&L → a photo → tick Facebook + Instagram → save → **Post now**. Check it on their Page.
+
+Repeat 6, 8–10 for each new client. When you want clients connected without the Tester step,
+apply for Meta App Review — see **SETUP-META-TIKTOK.md**, Part A step 8.
+
+## 7. TikTok app
+See **SETUP-META-TIKTOK.md**, Part B (create app, verify domain, sandbox, review).
 
 ## Daily use
 - Admin: Dashboard (all clients) → client → New post / Approve / Post now / Retry failed.
