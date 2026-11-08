@@ -7,10 +7,12 @@ PHP extensions: `pdo_mysql`, `curl`, `gd`, `mbstring`.
 1. cPanel → **Git Version Control** → **Create** → Clone URL
    `https://github.com/bothamaria169-code/boostme.git` (public repo, no token needed),
    Repository Path `repositories/boostme` → Create.
-2. cPanel → **Domains** → `boostme.swiftfusion.co.za` → **Manage** → Document Root
-   `repositories/boostme` → Update.
-3. Later updates: **Manage → Pull or Deploy → Update from Remote**. `.env` and `uploads/` are
-   git-ignored, so updates never touch them.
+2. **Manage → Pull or Deploy → Deploy HEAD Commit.** This copies the app into the subdomain folder
+   `/home/swiftfusionco/boostme.swiftfusion.co.za` (the subdomain keeps its normal document root).
+3. Every later update: **Update from Remote**, then **Deploy HEAD Commit**. Deploys never touch
+   `.env` or `uploads/`, and keep cPanel's PHP-version lines in `.htaccess`.
+
+Check: `https://boostme.swiftfusion.co.za/BoostMe-Guide.pdf` opens → the code is live.
 
 ## 2. Database
 phpMyAdmin → `swiftfusionco_boostme` → **Import** → `install.sql`. (Creates the tables and the
@@ -18,8 +20,8 @@ H&L Beauty Salon client.) Make sure user `swiftfusionco_boostme_admin` has ALL P
 (cPanel → MySQL Databases → Add User To Database).
 
 ## 3. .env
-File Manager → copy `.env.example` to `.env` (in `repositories/boostme`; tick *Show Hidden Files*
-in Settings to see it) → set `DB_USER=swiftfusionco_boostme_admin`, fill in `DB_PASS`, and the mailbox
+File Manager → open the **`boostme.swiftfusion.co.za`** folder (not `repositories/boostme`; tick
+*Show Hidden Files* in Settings) → copy `.env.example` to `.env` → set `DB_USER=swiftfusionco_boostme_admin`, fill in `DB_PASS`, and the mailbox
 (`MAIL_USER`/`MAIL_PASS` — create `boostme@swiftfusion.co.za` in cPanel → Email Accounts).
 
 ## 4. First login
@@ -29,7 +31,7 @@ Then **Clients → H&L Beauty Salon → Manage**: add their email + phone, and *
 ## 5. Cron (posts + Monday reports)
 cPanel → **Cron Jobs** → every 5 minutes (`*/5 * * * *`):
 ```
-/usr/local/bin/php /home/swiftfusionco/repositories/boostme/cron.php >/dev/null 2>&1
+/usr/local/bin/php /home/swiftfusionco/boostme.swiftfusion.co.za/cron.php >/dev/null 2>&1
 ```
 Check the PHP path: if cPanel shows a versioned one (e.g. `/usr/local/bin/ea-php82`), use that.
 

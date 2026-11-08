@@ -1,6 +1,6 @@
 <?php
 // Run every 5 minutes. cPanel → Cron Jobs (see DEPLOY.md for the exact line):
-//   */5 * * * * /usr/local/bin/php /home/USER/boostme.swiftfusion.co.za/cron.php >/dev/null 2>&1
+//   */5 * * * * /usr/local/bin/php /home/swiftfusionco/boostme.swiftfusion.co.za/cron.php >/dev/null 2>&1
 // No CLI cron? Call https://boostme.swiftfusion.co.za/cron.php?key=CRON_KEY instead.
 declare(strict_types=1);
 

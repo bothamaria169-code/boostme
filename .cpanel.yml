@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - /bin/bash /home/swiftfusionco/repositories/boostme/deploy.sh
