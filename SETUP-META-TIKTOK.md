@@ -43,9 +43,14 @@ Until Meta approves the app (step 8), it only works for people who have a role o
 - **Option 1 (best, scales):** the client makes **your** Facebook an admin of their Page
   (Page → Settings → Page access → Add new → your name, full control) and a partner in their
   Business portfolio. You then always connect with your own login.
-- **Option 2 (you're already logged in as them):** App dashboard → **App roles → Roles → Add People →
-  Tester** → type the client's Facebook name. Then, still logged in as the client, open
-  `developers.facebook.com/requests` and **Accept**. Also do this for each new client.
+- **Option 2 (use the client's own Facebook — what we use for H&L):** you don't need access to their Page.
+  1. In **your** browser profile: App dashboard → **App roles → Roles → Add People → Tester** → the
+     client's Facebook name or profile link.
+  2. In a **second browser profile** (or incognito) logged in as the client: open developers.facebook.com
+     → **Get started** (registers them as a developer: confirm the email/phone) → then
+     `developers.facebook.com/requests` → **Accept**.
+  3. In that same client window, log in to BoostMe as admin → H&L → **Connect**.
+  Repeat for each new client.
 
 ### 6. Switch the app to Live
 At the top of the dashboard (or **Publish** in the left menu), switch **App mode** to **Live**.
