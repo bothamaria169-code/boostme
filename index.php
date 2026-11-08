@@ -323,6 +323,17 @@ case 'settings':
         'tiktok_verify_file', 'tiktok_verify_content', 'report_day'];
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($keys as $k) {
+            $v = trim((string) ($_POST[$k] ?? ''));
+            // Meta IDs are numbers; an email here means the browser auto-filled a login.
+            if (in_array($k, ['meta_app_id', 'meta_config_id'], true) && $v !== '' && !ctype_digit($v)) {
+                flash('error', ($k === 'meta_app_id' ? 'App ID' : 'Configuration ID') . ' must be the number from your Meta app — "' . $v . '" was not saved.');
+                continue;
+            }
+            // A secret with "@" or spaces is an auto-filled password, not a Meta/TikTok secret.
+            if (str_ends_with($k, 'secret') && $v !== '' && preg_match('/[@\s]/', $v)) {
+                flash('error', 'That secret looks like a saved password, not an app secret — it was not saved.');
+                continue;
+            }
             if (isset($_POST[$k]) && !(str_ends_with($k, 'secret') && $_POST[$k] === '')) {   // blank secret = keep
                 set_setting($k, trim((string) $_POST[$k]));
             }

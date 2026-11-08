@@ -3,14 +3,14 @@
 <form method="post" autocomplete="off"><?= csrf_field() ?>
 <div class="grid2">
   <div class="card"><h2><i class="fa-brands fa-meta"></i> Meta app (Facebook + Instagram)</h2>
-    <label>App ID</label><input name="meta_app_id" autocomplete="off" inputmode="numeric" value="<?= $s('meta_app_id') ?>">
-    <label>App secret <small class="muted"><?= setting('meta_app_secret') ? '(saved — blank keeps it)' : '' ?></small></label><input type="password" name="meta_app_secret" autocomplete="new-password">
-    <label>Configuration ID <small class="muted">(only for Facebook Login for Business apps)</small></label><input name="meta_config_id" autocomplete="off" inputmode="numeric" value="<?= $s('meta_config_id') ?>">
+    <label>App ID</label><input name="meta_app_id" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" inputmode="numeric" value="<?= $s('meta_app_id') ?>">
+    <label>App secret <small class="muted"><?= setting('meta_app_secret') ? '(saved — blank keeps it)' : '' ?></small></label><input type="password" name="meta_app_secret" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')">
+    <label>Configuration ID <small class="muted">(only for Facebook Login for Business apps)</small></label><input name="meta_config_id" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" inputmode="numeric" value="<?= $s('meta_config_id') ?>">
     <p class="muted" style="font-size:13px">Valid OAuth Redirect URI to add in the Meta app:<br><code><?= e(url('connect/meta')) ?></code></p>
   </div>
   <div class="card"><h2><i class="fa-brands fa-tiktok"></i> TikTok app</h2>
-    <label>Client key</label><input name="tiktok_client_key" autocomplete="off" value="<?= $s('tiktok_client_key') ?>">
-    <label>Client secret <small class="muted"><?= setting('tiktok_client_secret') ? '(saved — blank keeps it)' : '' ?></small></label><input type="password" name="tiktok_client_secret" autocomplete="new-password">
+    <label>Client key</label><input name="tiktok_client_key" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" value="<?= $s('tiktok_client_key') ?>">
+    <label>Client secret <small class="muted"><?= setting('tiktok_client_secret') ? '(saved — blank keeps it)' : '' ?></small></label><input type="password" name="tiktok_client_secret" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')">
     <p class="muted" style="font-size:13px">Redirect URI: <code><?= e(url('connect/tiktok')) ?></code></p>
     <label>Domain check file name <small class="muted">(e.g. tiktokAbC123.txt)</small></label><input name="tiktok_verify_file" value="<?= $s('tiktok_verify_file') ?>">
     <label>Domain check file content</label><input name="tiktok_verify_content" value="<?= $s('tiktok_verify_content') ?>">
