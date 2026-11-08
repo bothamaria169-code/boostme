@@ -28,7 +28,25 @@ date_default_timezone_set(env('APP_TZ', 'Africa/Johannesburg'));
 error_reporting(E_ALL);
 ini_set('display_errors', env('APP_DEBUG') === 'true' ? '1' : '0');
 
-const PLATFORMS = ['facebook' => 'Facebook', 'instagram' => 'Instagram', 'tiktok' => 'TikTok'];
+// Database problems get a plain-English hint instead of a blank 500 (no passwords shown).
+set_exception_handler(static function (Throwable $e): void {
+    error_log((string) $e);
+    http_response_code(500);
+    $msg = $e->getMessage();
+    $hint = !$e instanceof PDOException ? '' : match (true) {
+        str_contains($msg, '1045') => 'The database rejected the login: check DB_USER and DB_PASS in .env (cPanel usernames start with swiftfusionco_).',
+        str_contains($msg, '1044') => 'The database user is not linked to the database: cPanel → MySQL Databases → Add User To Database → ALL PRIVILEGES.',
+        str_contains($msg, '1049') => 'DB_NAME in .env does not match a database in cPanel → MySQL Databases.',
+        str_contains($msg, '2002') => 'Cannot reach MySQL: set DB_HOST=localhost in .env.',
+        str_contains($msg, '42S02') => 'The tables are missing: phpMyAdmin → your database → Import → install.sql.',
+        default => 'Database error: ' . $msg,
+    };
+    echo '<div style="font:16px/1.5 Arial,sans-serif;max-width:560px;margin:10vh auto;padding:24px;border:1px solid #eee;border-radius:12px">'
+        . '<h2 style="color:#c2185b;margin-top:0">BoostMe needs a fix</h2><p>'
+        . htmlspecialchars($hint ?: (env('APP_DEBUG') === 'true' ? $msg : 'Something went wrong. Please try again.')) . '</p></div>';
+});
+
+const PLATFORMS =['facebook' => 'Facebook', 'instagram' => 'Instagram', 'tiktok' => 'TikTok'];
 
 // ── Database ───────────────────────────────────────────────────
 function db(): PDO
